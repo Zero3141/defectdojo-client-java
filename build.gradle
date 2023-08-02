@@ -19,6 +19,14 @@ group 'io.securecodebox'
 version = scmVersion.version
 sourceCompatibility = '17'
 
+scmVersion {
+    tag {
+        prefix.set('') // Remove default "v" prefix
+    }
+
+    useHighestVersion.set(true) // https://axion-release-plugin.readthedocs.io/en/latest/configuration/version/#tag-with-the-highest-version
+}
+
 repositories {
     mavenCentral()
 }
