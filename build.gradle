@@ -19,6 +19,12 @@ group 'io.securecodebox'
 version = scmVersion.version
 sourceCompatibility = '17'
 
+scmVersion {
+    tag {
+        prefix.set('') // Remove default "v" prefix
+    }
+}
+
 repositories {
     mavenCentral()
 }
