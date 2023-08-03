@@ -13,7 +13,7 @@ on:
     types: [published] # published instead of created because https://stackoverflow.com/a/61066906
 
 jobs:
-  publish-snapshot:
+  publish-release:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "Releasing version ${{ github.event.release.tag_name }}"
