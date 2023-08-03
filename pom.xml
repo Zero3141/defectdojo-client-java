@@ -30,8 +30,8 @@
     </prerequisites>
 
     <scm>
-        <connection>scm:git:git://github.com/Zero3141/defectdojo-client-java.git</connection>
-        <developerConnection>scm:git:git@github.com/Zero3141/defectdojo-client-java.git</developerConnection>
+        <connection>scm:git:ssh://github.com/Zero3141/defectdojo-client-java.git</connection>
+        <developerConnection>scm:git:ssh@github.com/Zero3141/defectdojo-client-java.git</developerConnection>
         <url>https://github.com/Zero3141/defectdojo-client-java.git</url>
         <tag>HEAD</tag>
     </scm>
