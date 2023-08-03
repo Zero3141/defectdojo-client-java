@@ -275,6 +275,11 @@
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>3.0.1</version>
+                    <configuration>
+                        <checkModificationExcludes>
+                            <checkModificationExclude>mvnw</checkModificationExclude> <!-- skip wrapper -->
+                        </checkModificationExcludes>
+                    </configuration>
                 </plugin>
 
                 <plugin>
