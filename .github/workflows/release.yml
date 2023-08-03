@@ -17,13 +17,19 @@ on:
         required: false
         default: ''
 
+env:
+  CUSTOM_VERSION: '' # If not empty, use as new version
+
 jobs:
   publish-release-custom:
     runs-on: ubuntu-22.04
+    if: !contains(github.event.head_commit.message, '[secureCodeBoxBot]')
     steps:
       - name: Custom version
-        if "${{ github.event.inputs.customversion != '' }}"
-        run: echo "Releasing version ${{ github.event.inputs.customversion }}"
+        if ${{ github.event.inputs.customversion != '' }}
+        run: |
+          echo 'CUSTOM_VERSION=${{ github.event.inputs.customversion }}' >> "$GITHUB_ENV"
+          echo "Releasing custom version ${{ github.event.inputs.customversion }}"
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -39,21 +45,20 @@ jobs:
           gpg-private-key: ${{ secrets.SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Test # Test must succeed before creating a release scm tag
+      - name: Build & Test # Test must succeed before releasing
         run: ./mvnw -B test
 
-      - name: Configure Git user
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-
       - name: Bump version & Publish to Maven Central
-        run: |
-          if [[ ${{ github.event.inputs.customversion != '' ]]; then
-            ./mvnw versions:set -DnewVersion=${{ github.event.inputs.customversion }}
-          else
-            ./mvnw -B release:prepare release:perform -P release 
-          fi
+        uses: qcastel/github-actions-maven-cmd@v1.12.31
+        with:
+          git-release-bot-name: secureCodeBoxBot
+          git-release-bot-email: securecodebox@iteratec.com
+
+          maven-args: -P release # Use the release profile
+
+          gpg-enabled: true
+          gpg-key: ${{ secrets.GPG_COMMITS_PRIVATE_KEY }}
+          gpg-passphrase: ${{ secrets.GPG_COMMITS_PASSPHRASE }}
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
