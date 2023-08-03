@@ -48,7 +48,6 @@ jobs:
           git config user.name "GitHub Actions"
 
       - name: Bump version & Publish to Maven Central
-        if ${{ github.event.inputs.customversion }} != ''
         run: ./mvnw versions:set -DnewVersion=${{ github.event.inputs.customversion }}
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
