@@ -5,7 +5,7 @@
 
     <groupId>io.securecodebox</groupId>
     <artifactId>defectdojo-client</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-beta2</version>
     <packaging>jar</packaging>
     <name>DefectDojo Client Java</name>
     <description>
@@ -190,50 +190,6 @@
             <build>
                 <plugins>
                     <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.5.0</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <bottom>
-                                Copyright &amp;copy; {currentYear} the secureCodeBox Authors. All Rights Reserved.
-                            </bottom>
-
-                            <doctitle>${project.name} - ${project.version}</doctitle>
-                            <windowtitle>${project.name} - ${project.version}</windowtitle>
-                            <show>private</show>
-                            <charset>${project.build.sourceEncoding}</charset>
-                            <docencoding>${project.build.sourceEncoding}</docencoding>
-                            <source>${project.build.version.source}</source>
-
-                            <links>
-                                <link>https://docs.oracle.com/en/java/javase/17/docs/api/</link>
-                            </links>
-                            <failOnError>false</failOnError>
-                        </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.3.0</version>
-                        <executions>
-                            <execution>
-                                <!-- https://central.sonatype.org/publish/publish-maven/#javadoc-and-sources-attachments -->
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>3.1.0</version>
                         <executions>
@@ -273,6 +229,20 @@
                         <showDeprecation>true</showDeprecation>
                         <compilerArgument>-Xlint:unchecked</compilerArgument>
                     </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <executions>
+                        <execution>
+                            <!-- https://central.sonatype.org/publish/publish-maven/#javadoc-and-sources-attachments -->
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
@@ -350,12 +320,50 @@
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.5.0</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <bottom>
+                            Copyright &amp;copy; {currentYear} the secureCodeBox Authors. All Rights Reserved.
+                        </bottom>
+
+                        <doctitle>${project.name} - ${project.version}</doctitle>
+                        <windowtitle>${project.name} - ${project.version}</windowtitle>
+                        <show>private</show>
+                        <charset>${project.build.sourceEncoding}</charset>
+                        <docencoding>${project.build.sourceEncoding}</docencoding>
+                        <source>${project.build.version.source}</source>
+
+                        <links>
+                            <link>https://docs.oracle.com/en/java/javase/17/docs/api/</link>
+                        </links>
+                        <failOnError>false</failOnError>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
 
             <plugin>
