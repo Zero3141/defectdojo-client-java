@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Custom version
-        if "${{ github.event.inputs.customversion != '' }}"
+        #if "${{ github.event.inputs.customversion != '' }}"
         run: echo "Releasing version ${{ github.event.inputs.customversion }}"
 
       - name: Checkout repository
