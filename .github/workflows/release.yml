@@ -9,13 +9,7 @@
 name: Publish Release
 
 # If input is empty we automatically bump the version
-on:
-  workflow_dispatch:
-    inputs:
-      customversion:
-        description: 'Custom version'
-        required: false
-        default: ''
+on: workflow_dispatch
 
 env:
   CUSTOM_VERSION: '' # If not empty, use as new version
@@ -25,11 +19,6 @@ jobs:
     runs-on: ubuntu-22.04
     if: !contains(github.event.head_commit.message, '[secureCodeBoxBot]')
     steps:
-      - name: Custom version
-        if ${{ github.event.inputs.customversion != '' }}
-        run: |
-          echo 'CUSTOM_VERSION=${{ github.event.inputs.customversion }}' >> "$GITHUB_ENV"
-          echo "Releasing custom version ${{ github.event.inputs.customversion }}"
 
       - name: Checkout repository
         uses: actions/checkout@v3
