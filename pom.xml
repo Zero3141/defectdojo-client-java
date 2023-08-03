@@ -30,9 +30,9 @@
     </prerequisites>
 
     <scm>
-        <connection>scm:git:git://github.com/secureCodeBox/defectdojo-client-java.git</connection>
-        <developerConnection>scm:git:git@github.com/secureCodeBox/defectdojo-client-java.git</developerConnection>
-        <url>https://github.com/secureCodeBox/defectdojo-client-java.git</url>
+        <connection>scm:git:git://github.com/Zero3141/defectdojo-client-java.git</connection>
+        <developerConnection>scm:git:git@github.com/Zero3141/defectdojo-client-java.git</developerConnection>
+        <url>https://github.com/Zero3141/defectdojo-client-java.git</url>
         <tag>HEAD</tag>
     </scm>
 
