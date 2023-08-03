@@ -30,11 +30,14 @@ jobs:
           gpg-private-key: ${{ secrets.SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
+      - name: Prepare wrapper
+        run: chmod +x mvnw
+
       - name: Build & Test # Test must succeed before releasing
         run: ./mvnw -B test
 
       - name: Bump version & Publish to Maven Central
-        uses: qcastel/github-actions-maven-cmd@master
+        uses: qcastel/github-actions-maven-cmd@master # TODO: define version
         with:
           git-release-bot-name: secureCodeBoxBot
           git-release-bot-email: securecodebox@iteratec.com
