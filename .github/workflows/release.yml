@@ -8,14 +8,10 @@
 
 name: Publish Release
 
-# If input is empty we automatically bump the version
 on: workflow_dispatch
 
-env:
-  CUSTOM_VERSION: '' # If not empty, use as new version
-
 jobs:
-  publish-release-custom:
+  publish-release:
     runs-on: ubuntu-22.04
     if: !contains(github.event.head_commit.message, '[secureCodeBoxBot]')
     steps:
