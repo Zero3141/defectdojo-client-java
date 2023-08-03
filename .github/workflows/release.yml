@@ -58,6 +58,8 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGNING_PASSWORD }}
           JAVA_HOME: /usr/lib/jvm/java-17-openjdk/ # Required by github-actions-maven-release
         with:
+            release-branch-name: "main"
+
             git-release-bot-name: "secureCodeBoxBot"
             git-release-bot-email: "securecodebox@iteratec.com"
 
