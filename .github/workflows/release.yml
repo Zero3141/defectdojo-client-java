@@ -39,6 +39,9 @@ jobs:
           gpg-private-key: ${{ secrets.SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
+      - name: Prepare wrapper
+        run: chmod +x mvnw
+
       - name: Test # Test must succeed before creating a release scm tag
         run: ./mvnw -B test
 
