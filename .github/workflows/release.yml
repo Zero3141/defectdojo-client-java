@@ -45,6 +45,11 @@ jobs:
       - name: Test # Test must succeed before creating a release scm tag
         run: ./mvnw -B test
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "securecodebox@iteratec.com"
+          git config --global user.name "SecureCodeBoxBot"
+
       - name: Bump custom version # Runs if custom version is set
         if: github.event.inputs.customversion != ''
         run: ./mvnw -B release:prepare -DreleaseVersion=${{ github.event.inputs.customversion }} -P release
