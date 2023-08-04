@@ -22,15 +22,15 @@ else
 fi
 
 # Filter the branch to execute the release on
-readonly local branch=${CI_COMMIT_REF_NAME##*/}
-echo "Current branch: ${branch}"
-echo "Release branch name: $RELEASE_BRANCH_NAME"
-if [[ -n "$RELEASE_BRANCH_NAME" && ! "${branch}" = "$RELEASE_BRANCH_NAME" ]]; then
-     echo "Skipping for ${branch} branch"
-     exit 0
-else
-     echo "We are on the release branch"
-fi
+#readonly local branch=${CI_COMMIT_REF_NAME##*/}
+#echo "Current branch: ${branch}"
+#echo "Release branch name: $RELEASE_BRANCH_NAME"
+#if [[ -n "$RELEASE_BRANCH_NAME" && ! "${branch}" = "$RELEASE_BRANCH_NAME" ]]; then
+#     echo "Skipping for ${branch} branch"
+#     exit 0
+#else
+#     echo "We are on the release branch"
+#fi
 
 #Configure the default env variables
 
