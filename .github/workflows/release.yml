@@ -69,6 +69,9 @@ jobs:
         uses: qcastel/github-actions-maven-release@master # TODO: change to fixed tag
         env:
           JAVA_HOME: /usr/lib/jvm/java-17-openjdk/ # TODO: maybe move java version to env?
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGNING_PASSWORD }}
         with:
           git-release-bot-name: SecureCodeBoxBot
           git-release-bot-email: securecodebox@iteratec.com
@@ -79,7 +82,7 @@ jobs:
 
           gpg-enabled: true
           gpg-key-id: ${{ secrets.SCB_BOT_GPG_KEY_ID }}
-          gpg-key: ${{ secrets.SCB_BOT_GPG_KEY }}
+          gpg-key: ${{ secrets.SCB_BOT_GPG_KEY }} # Warning: must be base64 encoded, see https://github.com/marketplace/actions/java-maven-release#get-the-gpg-public-and-private-key
           gpg-passphrase: ${{ secrets.SCB_BOT_GPG_PASSPHRASE }}
 
       # CASE: NO version set
