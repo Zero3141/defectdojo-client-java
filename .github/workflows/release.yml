@@ -64,7 +64,7 @@ jobs:
 #            token: '${{ secrets.BOT_TOKEN }}'
 
       # CASE: Version set
-      - name: [Custom version] Release & Publish
+      - name: "[Custom version] Release & Publish"
         if: github.event.inputs.customversion != '' # input "customversion" not empty
         uses: qcastel/github-actions-maven-release@master # TODO: change to fixed tag
         env:
@@ -82,7 +82,7 @@ jobs:
           gpg-passphrase: ${{ secrets.SCB_BOT_GPG_PASSPHRASE }}
 
       # CASE: NO version set
-      - name: [Auto version] Release & Publish
+      - name: "[Auto version] Release & Publish"
         if: github.event.inputs.customversion == '' # input "customversion" empty
         run: echo '1' # TODO
 
