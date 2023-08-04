@@ -58,6 +58,11 @@ jobs:
           git config --global user.email "securecodebox@iteratec.com"
           git config --global user.name "SecureCodeBoxBot"
 
+      - name: Configure GitHub Token
+        uses: oleksiyrudenko/gha-git-credentials@v2.1.1
+        with:
+            token: '${{ secrets.BOT_TOKEN }}'
+
       - name: Bump custom version # Runs if custom version is set
         if: github.event.inputs.customversion != ''
         run: ./mvnw -B release:prepare -DreleaseVersion=${{ github.event.inputs.customversion }} -P release
