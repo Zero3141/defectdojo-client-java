@@ -200,6 +200,7 @@
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
+                                    <keyname></keyname>
                                     <!-- This is required to make sure the plugin does not stop asking for -->
                                     <!-- user input on the passphrase -->
                                     <gpgArguments>
