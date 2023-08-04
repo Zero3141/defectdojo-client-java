@@ -78,6 +78,7 @@ jobs:
           maven-args: -DreleaseVersion=${{ github.event.inputs.customversion }} -P release #-DreleaseVersion: set version, -P: profile
 
           gpg-enabled: true
+          gpg-key-id: ${{ secrets.SCB_BOT_GPG_KEY_ID }}
           gpg-key: ${{ secrets.SCB_BOT_GPG_KEY }}
           gpg-passphrase: ${{ secrets.SCB_BOT_GPG_PASSPHRASE }}
 
