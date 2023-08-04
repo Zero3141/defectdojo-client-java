@@ -65,8 +65,15 @@ jobs:
       #      gpg_private_key: ${{ secrets.SIGNING_KEY }}
       #      passphrase: ${{ secrets.SIGNING_PASSWORD }}
 
+      - name: Configure Git user
+        run: |
+          git config user.email "securecodebox@iteratec.com"
+          git config user.name "SecureCodeBoxBot"
+
       - name: Prepare
-        run: ./mvnw release:prepare -B -DreleaseVersion=${{ github.event.inputs.customversion }} -Dusername= ${{ secrets.SCB_BOT_USER_TOKEN }}
+        run: ./mvnw release:prepare -B -DreleaseVersion=${{ github.event.inputs.customversion }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.SCB_BOT_USER_TOKEN }}
 
       # CASE: Version set
 #      - name: "[Custom version] Release & Publish"
