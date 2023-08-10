@@ -18,14 +18,14 @@ You can find the latest version on [Maven Central](https://central.sonatype.com/
 <dependency>
     <groupId>io.securecodebox</groupId>
     <artifactId>defectdojo-client</artifactId>
-    <version></version>
+    <version>1.0.1-SNAPSHOT</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation group: 'io.securecodebox', name: 'defectdojo-client', version: ''
+implementation group: 'io.securecodebox', name: 'defectdojo-client', version: '1.0.1-SNAPSHOT'
 ```
 
 ## Development
