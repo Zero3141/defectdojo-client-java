@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2023 iteratec GmbH
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# This workflow will publish a Java project with Maven
+# For Maven Release plugin see: https://maven.apache.org/maven-release/maven-release-plugin/
+# For GitHub release see: https://github.com/marketplace/actions/gh-release
+
+name: Okay Tests
+
+on: workflow_dispatch
+
+jobs:
+    publish-release:
+        runs-on: ubuntu-22.04
+        permissions:
+            contents: write # needed for release creation
+        steps:
+
+            - name: Checkout repository
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0 # required by previous_tag
+
+            - name: Set up JDK 17
+              uses: actions/setup-java@v3
+              with:
+                  java-version: 17
+                  distribution: temurin
+
+            - name: Import GPG key
+              uses: crazy-max/ghaction-import-gpg@v5
+              with:
+                  gpg_private_key: ${{ secrets.SCB_BOT_GPG_KEY }}
+                  passphrase: ${{ secrets.SCB_BOT_GPG_PASSPHRASE }}
+                  git_user_signingkey: true
+                  git_tag_gpgsign: true
+                  git_commit_gpgsign: true
+                  git_committer_name: secureCodeBoxBot
+                  git_committer_email: securecodebox@iteratec.com
+
+            - name: "Extract maven version" # required for following change readme step
+              id: extract-version
+              run: |
+                  MVN_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+                  echo "MVN_VERSION=$TERMINUS_RELEASE" >> $GITHUB_ENV
+
+            # Replaced all version occurrences in README.md (e.g., 1.0.0, 1.0.0-SNAPSHOT, and 1.0.0-beta3)
+            - name: "Change README"
+              run: |
+                  sed -i -e 's/[0-9].[0-9].[0-9]\(-[A-z0-9]*\)*/${{ steps.extract-version.outputs.MVN_VERSION }}/g' README.md
+                  git add README.md
+                  git commit -S -m "Update version in README"
+                  git push
+              env:
+                  GITHUB_TOKEN: ${{ secrets.SCB_BOT_USER_TOKEN }}
+
