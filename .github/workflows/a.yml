@@ -6,7 +6,7 @@
 # For Maven Release plugin see: https://maven.apache.org/maven-release/maven-release-plugin/
 # For GitHub release see: https://github.com/marketplace/actions/gh-release
 
-name: Publish Release
+name: A Test
 
 # If input is empty we automatically bump the version
 on: workflow_dispatch
